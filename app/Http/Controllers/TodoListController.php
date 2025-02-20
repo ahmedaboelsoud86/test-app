@@ -17,27 +17,33 @@ class TodoListController extends Controller
         $list = TodoList::all();
         return response($list);
     }
-    public function show(TodoList $todolist)
+    public function show(TodoList $list)
     {
        // $list = TodoList::findOrFail($id);
-        return response($todolist);
+        return response($list);
     }
 
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required'
-        ]);
-        $user = User::create([
-            'name' => 'ahmed',
-            'email' => 'ahmed',
-            'password' => 'ahmed',
-        ]);
+        $request->validate([ 'name' => 'required']);
+        $user = User::create([ 'name'=>'ahmed','email'=>'ahmed', 'password'=>'ahmed']);
         $list = TodoList::create([
             'name' => $request->name,
             'user_id' => $user->id,
         ]);
         return $list;
         //return response($list,Response::HTTP_CREATED);
+    }
+
+    public function destroy(TodoList $list){
+        $list->delete();
+        return response('', Response::HTTP_NO_CONTENT);
+    }
+    public function update(Request $request, TodoList $list)
+    {
+        $request->validate([ 'name' => 'required']);
+        $list->update($request->all());
+        return $list;
+        //return new TodoListResource($todo_list);
     }
 }
