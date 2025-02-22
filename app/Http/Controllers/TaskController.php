@@ -21,9 +21,15 @@ class TaskController extends Controller
     public function store(Request $request)
     {
         $task = Task::create([
-            'title' => $request->title
+            'title' => $request->title,
+            'todo_list_id' => $request->todo_list_id,
         ]);
         return response($task,201);
+    }
+    public function destroy(Task $task)
+    {
+        $task->delete();
+        return response('', Response::HTTP_NO_CONTENT);
     }
 
 }
