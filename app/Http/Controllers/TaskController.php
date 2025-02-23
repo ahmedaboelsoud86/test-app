@@ -20,6 +20,7 @@ class TaskController extends Controller
 
     public function store(Request $request)
     {
+
         $task = Task::create([
             'title' => $request->title,
             'todo_list_id' => $request->todo_list_id,

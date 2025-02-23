@@ -12,8 +12,8 @@ class TodoList extends Model
 
     protected $fillable = ['name','user_id'];
 
-    // public function tasks(): HasMany
-    // {
-    //     return $this->hasMany(Task::class);
-    // }
+    public function tasks(): HasMany
+    {
+        return $this->hasMany(Task::class);
+    }
 }
