@@ -18,8 +18,9 @@ class TodoListTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->authUser();
-        $this->list = $this->createTodoList();
+        $user = $this->authUser();
+        $this->list = $this->createTodoList(['name'=>'test todolist','user_id'=>$user->id]);
+
     }
     /**
      * A basic feature test example.
@@ -27,6 +28,7 @@ class TodoListTest extends TestCase
     public function test_fetch_all_todo_list(): void
     {
 
+        $this->createTodoList();
 
         $response = $this->getJson(route('todo-list.index'));
 

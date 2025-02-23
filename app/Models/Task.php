@@ -21,8 +21,8 @@ class Task extends Model
         return $this->belongsTo(TodoList::class);
     }
 
-    // public function label()
-    // {
-    //     return $this->belongsTo(Label::class);
-    // }
+    public function label()
+    {
+        return $this->belongsTo(Label::class);
+    }
 }
