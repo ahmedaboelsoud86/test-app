@@ -6,6 +6,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\Task;
+use App\Models\User;
 use App\Models\TodoList;
 
 class TaskTest extends TestCase
@@ -19,6 +20,7 @@ class TaskTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
+        $this->authUser();
         $this->list  =  $this->createTodoList();
         $this->task  =  $this->createTaskList(['todo_list_id'=>$this->list['id']]);
     }
@@ -43,7 +45,7 @@ class TaskTest extends TestCase
 
     public function test_delete_task(): void
     {
-        $this->deleteJson(route('task.destroy',$this->task->id));       
+        $this->deleteJson(route('task.destroy',$this->task->id));
         $this->assertDatabaseMissing('tasks',['title'=>$this->task->title]);
     }
 }

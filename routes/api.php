@@ -23,9 +23,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-Route::apiResource('todo-list', TodoListController::class);
-Route::apiResource('todo-list.task', TaskController::class)
-        ->except('show')->shallow();
+Route::middleware('auth:sanctum')->group(function () {
+    Route::apiResource('todo-list', TodoListController::class);
+    Route::apiResource('todo-list.task', TaskController::class)
+            ->except('show')->shallow();
+
+});
+
 
 
 
